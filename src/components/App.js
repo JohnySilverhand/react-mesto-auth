@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import {Route, Switch, useHistory } from 'react-router-dom';
 import Register from "./Register.js";
 import Login from "./Login.js";
-import * as auth from "../utils/auth.js"
-import Header from "./Header.js";
+import * as auth from "../utils/auth.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
 import ProtectedRoute from "./ProtectedRoute.js";
@@ -188,30 +187,30 @@ function App() {
   <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
+          <Route exact={true} path="/sign-in">
+            <Login
+              onAuthorize={onAuthorize}
+            />
+          </Route>
           <Route exact={true} path="/sign-up">
             <Register 
               onButtonClick={onRegister}
             />
           </Route>
-          <Route exact={true} path="sign-in">
-            <Login
-              onAuthorize={onAuthorize}
-            />
-          </Route>
-        </Switch>
       
-        <ProtectedRoute exact={true} path='/'
-          loggedIn = {loggedIn} 
-          onEditProfile = {setEditProfilePopupOpen}
-          onEditAvatar = {setEditAvatarProfilePopupOpen}
-          onAddCard = {setAddCardPopupOpen}
-          onCardClick = {setCard}
-          component = {Main}
-          onCardLike = {handleCardLike}
-          onCardDelete = {handleCardDelete}
-          cards = {cards}
-        >
-        </ProtectedRoute>
+          <ProtectedRoute exact={true} path='/'
+            loggedIn = {loggedIn} 
+            onEditProfile = {setEditProfilePopupOpen}
+            onEditAvatar = {setEditAvatarProfilePopupOpen}
+            onAddCard = {setAddCardPopupOpen}
+            onCardClick = {setCard}
+            component = {Main}
+            onCardLike = {handleCardLike}
+            onCardDelete = {handleCardDelete}
+            cards = {cards}
+          >
+          </ProtectedRoute>
+        </Switch>
 
         <Footer />
 

@@ -2,6 +2,7 @@ import React from "react"
 import { useHistory, withRouter } from "react-router-dom";
 import Header from "./Header.js";
 
+
 function Login({onAuthorize}) {
 
   const [email, setEmail] = React.useState('');
@@ -36,22 +37,24 @@ function Login({onAuthorize}) {
       text='Регистрация'
       onClick={onRegister}
     />
-      <div>
-        <h2>Вход</h2>
-        <form onSubmit={handleSubmit}>
+      <div className="login">
+        <h2 className="login__header">Вход</h2>
+        <form onSubmit={handleSubmit} className="popup__form login__form">
           <input
+            className="popup__input login__input"
             value={email}
             onChange={handleEmail}
             placeholder='Email'
           >
           </input>
           <input
+            className="popup__input login__input"
             value={password}
             onChange={handlePassword}
             placeholder='Пароль'
           >
           </input>
-          <button type="submit">
+          <button type="submit" className="poup__form-submit login__button-submit">
             Войти
           </button>
         </form>
@@ -60,4 +63,4 @@ function Login({onAuthorize}) {
   )
 }
 
-export default withRouter(Login);
+export default withRouter (Login);

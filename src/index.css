@@ -55,3 +55,5 @@
 @import url(./blocks/popup/_avatar/__span/popup_avatar__span.css);
 @import url(./blocks/profile/__image-container/profile__image-contaner.css);
 @import url(./blocks/popup/__input/_type/popup__input_type_avatar.css);
+@import url(./blocks/login/login.css);
+@import url(./blocks/login/login__header.css);

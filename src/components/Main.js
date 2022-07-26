@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../utils/api";
+import Header from "./Header.js";
 import Card from "../components/Card.js";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
@@ -10,6 +10,10 @@ function Main({onEditProfile, onAddCard, onEditAvatar, onCardClick, cards, onCar
     
 	return (
     <main className="content">
+      <Header
+        text = "Выйти"
+      >
+      </Header>
       <section className="profile">
         <div className="profile__flex-row">
           <div className="profile__image-container" onClick={() => {onEditAvatar(true)}}>
