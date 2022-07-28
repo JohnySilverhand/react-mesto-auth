@@ -69,3 +69,5 @@
 @import url(./blocks/register/__header/register__header.css);
 @import url(./blocks/register/__remove/register__remove.css);
 @import url(./blocks/register/register.css);
+@import url(./blocks/infotool/__image/infotool__image.css);
+@import url(./blocks/infotool/__text/infotool__text.css);

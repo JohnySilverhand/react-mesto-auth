@@ -3,6 +3,8 @@ import {Route, Switch, useHistory } from 'react-router-dom';
 import Register from "./Register.js";
 import Login from "./Login.js";
 import InfoTooltip from "./InfoTooltip.js";
+import no from "../images/no.png";
+import yes from "../images/yes.png";
 import * as auth from "../utils/auth.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -169,11 +171,11 @@ function App() {
           history.push('./sign-in');
           setInfoTooltip(true);
           setText('Вы успешно зарегестрировались!')
-
+          setImage(yes)
         } else {
           setInfoTooltip(true)
           setText('Что-то пошло не так! Попробуйте ещё раз.')
-
+          setImage(no)
         }
       })
       .catch((err) => {
