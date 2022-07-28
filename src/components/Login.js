@@ -54,7 +54,7 @@ function Login({onAuthorize}) {
             placeholder='Пароль'
           >
           </input>
-          <button type="submit" className="poup__form-submit login__button-submit">
+          <button type="submit" className="popup__form-submit login__button-submit">
             Войти
           </button>
         </form>

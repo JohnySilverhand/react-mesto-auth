@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Route, Switch, useHistory } from 'react-router-dom';
 import Register from "./Register.js";
 import Login from "./Login.js";
+import InfoTooltip from "./InfoTooltip.js";
 import * as auth from "../utils/auth.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -20,6 +21,9 @@ function App() {
   const [editProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [editAvatarProfilePopupOpen, setEditAvatarProfilePopupOpen] = useState(false);
   const [addCardPopupOpen, setAddCardPopupOpen] = useState(false);
+  const [isInfoTooltip, setInfoTooltip] = useState(false);
+  const [text, setText] = useState('');
+  const [image, setImage] = useState('');
   const [card, setCard] = useState({});
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState('');
@@ -129,13 +133,14 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddCardPopupOpen(false);
     setCard({});
+    setInfoTooltip(false);
   }
 
   function handleTokenCheck() {
-    if(localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt');
-      if(jwt) {
-        auth.getContent(jwt)
+    if(localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        auth.getContent(token)
           .then((res) => {
             if(res){
               const email = res.data.email
@@ -152,7 +157,7 @@ function App() {
   }
 
   function deleteToken() {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('token');
     history.push('/sign-in')
     setLoggedIn(false)
   }
@@ -162,6 +167,13 @@ function App() {
       .then((res) => {
         if(res) {
           history.push('./sign-in');
+          setInfoTooltip(true);
+          setText('Вы успешно зарегестрировались!')
+
+        } else {
+          setInfoTooltip(true)
+          setText('Что-то пошло не так! Попробуйте ещё раз.')
+
         }
       })
       .catch((err) => {
@@ -172,7 +184,7 @@ function App() {
   function onAuthorize(email, password) {
     auth.authorize(email, password)
       .then((data) => {
-        if(data.jwt) {
+        if(data.token) {
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/')
@@ -205,6 +217,8 @@ function App() {
             onAddCard = {setAddCardPopupOpen}
             onCardClick = {setCard}
             component = {Main}
+            onDeleteToken = {deleteToken}
+            userData = {userEmail}
             onCardLike = {handleCardLike}
             onCardDelete = {handleCardDelete}
             cards = {cards}
@@ -233,6 +247,13 @@ function App() {
         />
 
         <ImagePopup card = {card} close = {closePopups} />  
+
+        <InfoTooltip 
+          isOpen={isInfoTooltip}
+          onClose={closePopups}
+          image={image}
+          text={text}
+        />
 
       </div>
   </CurrentUserContext.Provider>  

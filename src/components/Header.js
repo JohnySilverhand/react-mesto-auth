@@ -6,7 +6,7 @@ function Header(props) {
     <header className="header">
       <img className="header__logo" src={logo} alt="логотип заголовка"/>
       {props.children}
-      <button className="headet__button">{props.text}</button>
+      <button className="header__button" onClick={props.onClick}>{props.text}</button>
     </header>
   );
 }

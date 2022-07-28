@@ -4,15 +4,21 @@ import Card from "../components/Card.js";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 
-function Main({onEditProfile, onAddCard, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete}) {
+function Main({onEditProfile, onAddCard, onEditAvatar, userData, onCardClick, cards, onCardLike, onCardDelete, onDeleteToken}) {
 
   const currentUser = React.useContext(CurrentUserContext);
+  const email = userData;
+
+  function onSignOut() {
+    onDeleteToken();
+  }
     
 	return (
     <main className="content">
       <Header
         text = "Выйти"
-      >
+        onClick = {onSignOut}>
+        <p className="header__text">{email}</p>
       </Header>
       <section className="profile">
         <div className="profile__flex-row">

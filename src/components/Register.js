@@ -1,5 +1,5 @@
 import React from "react"
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Header from "./Header.js";
 
 function Register({onButtonClick}) {
@@ -31,28 +31,33 @@ function Register({onButtonClick}) {
       text='Войти'
       onClick = {onLogin}
     />
-      <div>
-        <h2>Регистрация</h2>
-        <form onSubmit={handleSubmit}>
+      <div className="register">
+        <h2 className="register__header">Регистрация</h2>
+        <form onSubmit={handleSubmit} className="popup__form register__form">
           <input
+            className="popup__input register__input"
             value={email}
             onChange={handleEmail}
             placeholder='Email'
           >
           </input>
           <input
+            className="popup__input register__input"
             value={password}
             onChange={handlePassword}
             placeholder='Пароль'
           >
           </input>
           <button
+            className="popup__form-submit register__button-submit"
             type="submit"
           >
             Зарегестрироваться
           </button>
+          <p className="register__button">Уже зарегестрированы? 
+            <Link to='sign-in' className="register__remove"> Войти</Link>
+          </p>
         </form>
-        <p>Уже зарегестрированы? Войти</p>
       </div>
   </section>
   )
