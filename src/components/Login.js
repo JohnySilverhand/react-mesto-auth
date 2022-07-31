@@ -26,8 +26,6 @@ function Login({onAuthorize}) {
     if(!email || !password) {
       return;
     }
-    setEmail('');
-    setPassword('');
     onAuthorize(email, password);
   }
 
@@ -52,6 +50,7 @@ function Login({onAuthorize}) {
             value={password}
             onChange={handlePassword}
             placeholder='Пароль'
+            type= 'password'
           >
           </input>
           <button type="submit" className="popup__form-submit login__button-submit">
