@@ -46,15 +46,16 @@ function Register({onButtonClick}) {
             value={password}
             onChange={handlePassword}
             placeholder='Пароль'
+            type='password'
           >
           </input>
           <button
             className="popup__form-submit register__button-submit"
             type="submit"
           >
-            Зарегестрироваться
+            Зарегистрироваться
           </button>
-          <p className="register__button">Уже зарегестрированы? 
+          <p className="register__button">Уже зарегистрированы? 
             <Link to='sign-in' className="register__remove"> Войти</Link>
           </p>
         </form>

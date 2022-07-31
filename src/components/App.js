@@ -190,6 +190,10 @@ function App() {
           setLoggedIn(true);
           setUserEmail(email);
           history.push('/')
+        } else {
+          setInfoTooltip(true)
+          setText('Что-то пошло не так! Попробуйте ещё раз.')
+          setImage(no)
         }
       })
       .catch((err) => {

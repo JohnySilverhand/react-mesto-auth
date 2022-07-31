@@ -22,17 +22,17 @@ function Main({onEditProfile, onAddCard, onEditAvatar, userData, onCardClick, ca
       </Header>
       <section className="profile">
         <div className="profile__flex-row">
-          <div className="profile__image-container" onClick={() => {onEditAvatar(true)}}>
+          <div className="profile__image-container" onClick={() => onEditAvatar(true)}>
             <img className="profile__image" alt="картинка профиля" src={currentUser.avatar} />
             <button className="profile__image-button" type="button"></button>
           </div>
         <div className="profile__info">
           <h1 className="profile__header">{currentUser.name}</h1>
           <p className="profile__text">{currentUser.about}</p>
-          <button className="profile__edit" type="button" onClick={() => {onEditProfile(true)}}></button>
+          <button className="profile__edit" type="button" onClick={() => onEditProfile(true)}></button>
         </div>
         </div>
-        <button className="profile__add-button" type="button" onClick={() => {onAddCard(true)}}></button>
+        <button className="profile__add-button" type="button" onClick={() => onAddCard(true)}></button>
       </section>
 
       <section className="elements-card">
