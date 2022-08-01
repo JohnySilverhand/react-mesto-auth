@@ -167,23 +167,19 @@ function App() {
   function onRegister(email, password) {
     auth.register(email, password)
       .then((data) => {
-        if(data.token) {
-          localStorage.setItem('token', data.token)
+        if(data) {
           setInfoTooltip(true)
           setText('Вы успешно зарегестрировались!')
           setImage(yes)
           history.push('./sign-in');
-      } else {
-        setInfoTooltip(true)
-          setText('Что то пошло не так')
-          setImage(no)
-      }
+        }
       })
-      .catch((err) => {
-        if(err.status === 400){
-          console.log(err)
-      }
-  })
+    .catch((err) => {
+      console.log(err);
+        setInfoTooltip(true)
+        setText('Что-то пошло не так! Попробуйте ещё раз.')
+        setImage(no)
+    })
 }
 
   function onAuthorize(email, password) {
@@ -194,14 +190,13 @@ function App() {
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
-        } else {
-          setInfoTooltip(true)
-          setText('Что то пошло не так')
-          setImage(no)
         }
       })
       .catch((err) => {
         console.log(err);
+        setInfoTooltip(true)
+        setText('Что-то пошло не так! Попробуйте ещё раз.')
+        setImage(no)
       })
   }
   
