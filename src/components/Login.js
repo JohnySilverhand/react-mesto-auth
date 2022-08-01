@@ -43,6 +43,7 @@ function Login({onAuthorize}) {
             value={email}
             onChange={handleEmail}
             placeholder='Email'
+            type='email'
           >
           </input>
           <input

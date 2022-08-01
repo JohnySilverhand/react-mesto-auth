@@ -1,7 +1,7 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
 const handleResponse = (res) => {
-  if(res.status === 200) {
+  if(res.status === 200 || 201) {
     return res.json();
   }
   return Promise.reject(res.status);
@@ -16,14 +16,7 @@ export const register = (email, password) => {
     },
     body: JSON.stringify({email, password})
   })
-  .then((res) => {
-    if(res.status === 201) {
-      return res.json();
-    }
-  })
-  .then((res) => {
-    return res;
-  })
+  .then((res) => handleResponse(res))
 }
 
 export const authorize = (email, password) => {
@@ -36,10 +29,6 @@ export const authorize = (email, password) => {
     body: JSON.stringify({email, password})
   })
   .then((res) => handleResponse(res))
-  .then((data) => {
-    localStorage.setItem('token', data.token)
-    return data;
-  })
 }
 
 export const getContent = (token) => {
