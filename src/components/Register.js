@@ -39,6 +39,7 @@ function Register({onButtonClick}) {
             value={email}
             onChange={handleEmail}
             placeholder='Email'
+            type='email'
           >
           </input>
           <input
