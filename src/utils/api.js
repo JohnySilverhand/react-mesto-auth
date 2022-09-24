@@ -6,10 +6,6 @@ class Api {
 		this._headers = headers;
 	}
 
-	getToken = (token) => {
-		this._token = `Bearer ${token}`
-	}
-
 	handleResponse(res) {
 		if (res.ok) {
 			return res.json();

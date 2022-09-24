@@ -139,11 +139,12 @@ function App() {
   }
 
   function handleTokenCheck() {
+    if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
       if (token) {
         auth.getContent(token)
           .then((res) => {
-            if(res){
+            if(res) {
               const email = res.user.email
               setLoggedIn(true)
               setUserEmail(email);
@@ -154,6 +155,7 @@ function App() {
             console.log(err);
           })
       }
+    }
   }
 
   function deleteToken() {
