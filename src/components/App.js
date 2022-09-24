@@ -187,7 +187,7 @@ function App() {
     auth.authorize(email, password)
       .then((data) => {
         if(data.token) {
-        localStorage.setItem('tiken', data.token);
+        localStorage.setItem('token', data.token);
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
