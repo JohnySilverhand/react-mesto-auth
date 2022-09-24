@@ -139,13 +139,12 @@ function App() {
   }
 
   function handleTokenCheck() {
-    if(localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      if(token) {
+      if (token) {
         auth.getContent(token)
           .then((res) => {
             if(res){
-              const email = res.data.email
+              const email = res.user.email
               setLoggedIn(true)
               setUserEmail(email);
             }
@@ -155,13 +154,13 @@ function App() {
             console.log(err);
           })
       }
-    }
   }
 
   function deleteToken() {
     localStorage.removeItem('token');
-    history.push('/sign-in')
-    setLoggedIn(false)
+    history.push('/signin');
+    setLoggedIn(false);
+    setUserEmail(null);
   }
 
   function onRegister(email, password) {
@@ -171,7 +170,7 @@ function App() {
           setInfoTooltip(true)
           setText('Вы успешно зарегестрировались!')
           setImage(yes)
-          history.push('./sign-in');
+          history.push('./signin');
         }
       })
     .catch((err) => {
@@ -186,7 +185,8 @@ function App() {
     auth.authorize(email, password)
       .then((data) => {
         if(data.token) {
-        localStorage.setItem('token', data.token)
+        const token = localStorage.getItem('token');
+        api.getToken(token);
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
@@ -204,12 +204,12 @@ function App() {
   <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
-          <Route exact={true} path="/sign-in">
+          <Route exact={true} path="/signin">
             <Login
               onAuthorize={onAuthorize}
             />
           </Route>
-          <Route exact={true} path="/sign-up">
+          <Route exact={true} path="/signup">
             <Register 
               onButtonClick={onRegister}
             />

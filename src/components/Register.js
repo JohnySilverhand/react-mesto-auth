@@ -9,7 +9,7 @@ function Register({onButtonClick}) {
   let history =  useHistory();
 
   function onLogin() {
-    history.push('/sign-in');
+    history.push('/signin');
   }
 
   function handlePassword(e) {
@@ -57,7 +57,7 @@ function Register({onButtonClick}) {
             Зарегистрироваться
           </button>
           <p className="register__button">Уже зарегистрированы? 
-            <Link to='sign-in' className="register__remove"> Войти</Link>
+            <Link to='signin' className="register__remove"> Войти</Link>
           </p>
         </form>
       </div>
