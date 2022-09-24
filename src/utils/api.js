@@ -4,7 +4,6 @@ class Api {
 	constructor({url, headers}) {
 		this._url = url;
 		this._headers = headers;
-		this._token = headers.authorization;
 	}
 
 	getToken = (token) => {
@@ -20,18 +19,14 @@ class Api {
 
 	getCards() {
 		return fetch (`${this._url}/cards`, {
-			headers: {
-				authorization: this._token
-			}
+			headers: this._headers
 		})
 		.then((res) => this.handleResponse(res));
 	}
 
 	getProfileInfo() {
 		return fetch (`${this._url}/users/me`, {
-			headers: {
-				authorization: this._token
-			}
+			headers: this._headers
 		})
 		.then((res) => this.handleResponse(res));
 	}
