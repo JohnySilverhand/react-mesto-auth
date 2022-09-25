@@ -33,10 +33,6 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
 
   React.useEffect(() => {
-    handleTokenCheck()
-  }, []);
-
-  React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       auth

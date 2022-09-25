@@ -32,14 +32,17 @@ class Api {
 		.then((res) => this.handleResponse(res));
 	}
 
-	addUserInfo(data) {
+	addUserInfo(name, about) {
 		return fetch (`${this._url}/users/me`, {
 			method: 'PATCH',
 			headers: {
         authorization: this._token,
         'Content-Type': 'application/json'
       },
-			body: JSON.stringify(data)
+			body: JSON.stringify({
+				name: name, 
+				about: about
+			})
 		})
 		.then((res)=>	this.handleResponse(res));
 	}
