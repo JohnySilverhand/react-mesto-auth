@@ -59,7 +59,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      api.getProfileInfo()
+      api.addUserInfo()
       .then((data) => {
         setCurrentUser(data);
       })
