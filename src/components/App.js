@@ -59,7 +59,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      api.addUserInfo()
+      api.getProfileInfo()
       .then((data) => {
         setCurrentUser(data);
       })
@@ -108,8 +108,8 @@ function App() {
       })
   }
 
-  function handleUpdateUser(data) {
-    api.addUserInfo(data)
+  function handleUpdateUser(name, about) {
+    api.addUserInfo(name, about)
       .then((userData) => {
         setCurrentUser(userData)
         closePopups(setEditProfilePopupOpen);
