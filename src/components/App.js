@@ -37,35 +37,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if(loggedIn){
-    api.getProfileInfo()
-    .then((userInfo) => {
-      setCurrentUser(userInfo)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-
-    api.getCards()
-    .then((data) => {
-      setCards(
-        data.map((card) => ({
-          _id: card._id,
-          link: card.link,
-          name: card.name,
-          likes: card.likes,
-          owner: card.owner
-        })
-        )
-      )
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    }
-  }, [loggedIn]);
-
-  React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       auth
@@ -85,6 +56,25 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) history.push("/");
   }, [history, loggedIn]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      api.getProfileInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      api.getCards()
+        .then((data) => {
+          setCards(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [loggedIn])
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(item => item._id === currentUser._id );
