@@ -64,7 +64,15 @@ function App() {
       })
       api.getCards()
         .then((data) => {
-          setCards(data);
+          setCards(
+            data.map(() => ({
+              _id: card._id,
+              link: card.link,
+              name: card.name,
+              likes: card.likes,
+              owner: card.owner
+            }))
+          )
         })
         .catch((err) => {
           console.log(err);
@@ -146,7 +154,6 @@ function App() {
   }
 
   function handleTokenCheck() {
-    if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
       if (token) {
         auth.getContent(token)
@@ -162,8 +169,11 @@ function App() {
             console.log(err);
           })
       }
-    }
   }
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   function deleteToken() {
     localStorage.removeItem('token');
@@ -204,6 +214,7 @@ function App() {
       .catch((err) => {
         console.log(err);
         setInfoTooltip(true)
+        setLoggedIn(false)
         setText('Что-то пошло не так! Попробуйте ещё раз.')
         setImage(no)
       })

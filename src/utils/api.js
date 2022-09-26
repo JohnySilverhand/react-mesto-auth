@@ -32,17 +32,11 @@ class Api {
 		.then((res) => this.handleResponse(res));
 	}
 
-	addUserInfo(name, about) {
+	addUserInfo(data) {
 		return fetch (`${this._url}/users/me`, {
 			method: 'PATCH',
-			headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
-			body: JSON.stringify({
-				name: name, 
-				about: about
-			})
+			headers: this._headers,
+			body: JSON.stringify(data)
 		})
 		.then((res)=>	this.handleResponse(res));
 	}
@@ -50,10 +44,7 @@ class Api {
 	addUserAvatar(data) {
 		return fetch (`${this._url}/users/me/avatar`, {
 			method: 'PATCH',
-			headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
+			headers: this._headers,
 			body: JSON.stringify(data)
 		})
 		.then((res) => this.handleResponse(res));
@@ -62,10 +53,7 @@ class Api {
 	addCards(card) {
 		return fetch (`${this._url}/cards`, {
 			method: 'POST',
-			headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
+			headers: this._headers,
 			body: JSON.stringify(card)
 		})
 		.then((res) => this.handleResponse(res));
@@ -74,9 +62,8 @@ class Api {
 	deleteCard(data) {
 		return fetch (`${this._url}/cards/${data._id}`, {
 			method: 'DELETE',
-			headers: {
-        authorization: this._token,
-      },
+			headers: this._headers,
+			body: JSON.stringify(data)
 		})
 		.then((res) => this.handleResponse(res));
 	}
@@ -84,9 +71,7 @@ class Api {
 	likeCard(data) {
 		return fetch (`${this._url}/cards/${data._id}/likes`, {
 			method: 'PUT',
-			headers: {
-        authorization: this._token,
-      },
+			headers: this._headers,
 		})
 		.then((res) => this.handleResponse(res));
 	}	
@@ -94,9 +79,7 @@ class Api {
 	dislikeCard(data) {
 		return fetch (`${this._url}/cards/${data._id}/likes`, {
 			method: 'DELETE',
-			headers: {
-        authorization: this._token,
-      },
+			headers: this._headers,
 		})
 		.then((res) => this.handleResponse(res));
 	}
