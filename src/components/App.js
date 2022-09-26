@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {Route, Switch, useHistory } from 'react-router-dom';
-import Header from './Header.js';
 import Register from "./Register.js";
 import Login from "./Login.js";
 import InfoTooltip from "./InfoTooltip.js";
@@ -220,11 +219,6 @@ function App() {
   return (
   <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-
-        <Header
-         email={userEmail}
-        />
-
         <Switch>
           <Route exact={true} path="/signin">
             <Login
