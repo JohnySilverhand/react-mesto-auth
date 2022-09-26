@@ -173,7 +173,7 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [loggedIn]);
 
   function deleteToken() {
     localStorage.removeItem('token');
