@@ -175,7 +175,6 @@ function App() {
     localStorage.removeItem('token');
     history.push('/signin');
     setLoggedIn(false);
-    setUserEmail(null);
   }
 
   function onRegister(email, password) {
