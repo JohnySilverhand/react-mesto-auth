@@ -57,7 +57,7 @@ function App() {
     if (loggedIn) {
       api.getProfileInfo()
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data.userData);
       })
       .catch((err) => {
         console.log(err);

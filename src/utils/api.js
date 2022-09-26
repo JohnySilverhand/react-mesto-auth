@@ -1,7 +1,7 @@
 const token = localStorage.getItem('token');
 
 class Api {
-	constructor({url, headers}) {
+	constructor({ url, headers }) {
 		this._url = url;
 		this._headers = headers;
 		this._token = headers.authorization;
@@ -68,9 +68,8 @@ class Api {
 		.then((res) => this.handleResponse(res));
 	}
 
-	likeCard(id) {
-		const cardId = id;
-		return fetch (`${this._url}/cards/${cardId}/likes`, {
+	likeCard(data) {
+		return fetch (`${this._url}/cards/${data._id}/likes`, {
 			method: 'PUT',
 			headers: this._headers,
 		})
