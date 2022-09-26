@@ -33,6 +33,10 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
 
   React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       auth
@@ -48,10 +52,6 @@ function App() {
         });
     }
   }, []);
-
-  React.useEffect(() => {
-    if (loggedIn) history.push("/");
-  }, [history, loggedIn]);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -115,7 +115,7 @@ function App() {
   function handleUpdateUser(name, about) {
     api.addUserInfo(name, about)
       .then((userData) => {
-        setCurrentUser(userData)
+        setCurrentUser(userData.user)
         closePopups(setEditProfilePopupOpen);
       })
       .catch((err) => {
@@ -126,7 +126,7 @@ function App() {
   function handleUpdateAvatar(data) {
     api.addUserAvatar(data)
       .then((userData) => {
-        setCurrentUser(userData)
+        setCurrentUser(userData.user)
         closePopups(setEditAvatarProfilePopupOpen)
       })
       .catch((err) => {
@@ -170,10 +170,6 @@ function App() {
           })
       }
   }
-
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, [loggedIn]);
 
   function deleteToken() {
     localStorage.removeItem('token');
