@@ -78,13 +78,13 @@ function App() {
           console.log(err);
         })
     }
-  }, [card._id, card.likes, card.link, card.name, card.owner, loggedIn])
+  }, [loggedIn])
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(item => item === currentUser._id );
+    const isLiked = card.likes.some((item) => item === currentUser._id );
   
     if (!isLiked) {
-      api.likeCard(card)
+      api.likeCard(card._id)
         .then((newCard) => {
           setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
         })
@@ -92,7 +92,7 @@ function App() {
           console.log (err);
         })
     } else {
-        api.dislikeCard (card)
+        api.dislikeCard (card._id)
           .then ((newCard) => {
             setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
           })
@@ -103,7 +103,7 @@ function App() {
 } 
 
   function handleCardDelete(card) {
-    api.deleteCard(card)
+    api.deleteCard(card, card._id)
       .then(() => {
         setCards(state => state.filter((c) => c._id !== card._id));
       })
@@ -175,6 +175,7 @@ function App() {
     localStorage.removeItem('token');
     history.push('/signin');
     setLoggedIn(false);
+    setUserEmail(null);
   }
 
   function onRegister(email, password) {
