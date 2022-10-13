@@ -37,23 +37,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      auth
-        .getContent(token)
-        .then((data) => {
-          if (data) {
-            setLoggedIn(true);
-            setUserEmail(data.email);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
-
-  React.useEffect(() => {
     if (loggedIn) {
       api.getProfileInfo()
       .then((data) => {
