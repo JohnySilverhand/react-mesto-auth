@@ -19,17 +19,16 @@ export const register = (email, password) => {
   .then(handleResponse)
 }
 
-export const authorize = (email, password, token) => {
+export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type' : 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Content-Type' : 'application/json'
     },
     body: JSON.stringify({email, password})
   })
-  .then(handleResponse)
+  .then((res) => handleResponse(res))
   .then((data) => {
     localStorage.setItem('token', data.token);
     return data;
