@@ -183,6 +183,8 @@ function App() {
     auth.authorize(email, password)
       .then((data) => {
         if(data.token) {
+        const token = localStorage.getItem('token');
+        api.getToken(token);
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
