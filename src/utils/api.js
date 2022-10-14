@@ -1,10 +1,15 @@
-const token = localStorage.getItem('token');
-
 class Api {
 	constructor({ url, headers }) {
 		this._url = url;
 		this._headers = headers;
-		this._token = headers.authorization;
+	}
+	
+	_getHeaders() {
+		const token = localStorage.getItem('token');
+		return {
+			'Authorization': `Bearer ${token}`,
+			...this._headers,
+		};
 	}
 
 	handleResponse(res) {
@@ -16,18 +21,14 @@ class Api {
 
 	getCards() {
 		return fetch (`${this._url}/cards`, {
-			headers: {
-				authorization: this._token
-			}
+			headers: this._getHeaders()
 		})
 		.then((res) => this.handleResponse(res));
 	}
 
 	getProfileInfo() {
 		return fetch (`${this._url}/users/me`, {
-			headers: {
-				authorization: this._token
-			}
+			headers: this._getHeaders()
 		})
 		.then((res) => this.handleResponse(res));
 	}
@@ -96,7 +97,6 @@ class Api {
 const api = new Api({
 	url: 'https://project.nomorepartiesxyz.ru',
 	headers: {
-		 authorization:`Bearer ${token}`,
 		'Content-Type':'application/json',
 	}
 });
